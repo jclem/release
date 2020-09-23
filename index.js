@@ -16,6 +16,7 @@ main().catch(core.setFailed)
 async function main() {
   const releaseBranch = getInput('branch', 'release')
 
+  await install()
   await build()
   await checkout(releaseBranch)
   await commit()
@@ -25,6 +26,12 @@ async function main() {
 async function checkout(releaseBranch) {
   await group('Checking out release branch', async () => {
     await exec.exec('git', ['checkout', releaseBranch])
+  })
+}
+
+async function install() {
+  await group('Installing npm dependencies', async () => {
+    await exec.exec('npm', ['install'])
   })
 }
 

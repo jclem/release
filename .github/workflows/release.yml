@@ -3,9 +3,8 @@ name: Create a release
 on:
   workflow_dispatch:
     inputs:
-      release:
-        description: One of "major", "minor", or "patch", telling this action what type of version update to perform
-        required: true
+      version: {required: true}
+      pre-id:
 
 jobs:
   release:
@@ -14,4 +13,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          release: ${{ github.event.inputs.release }}
+          release: ${{ github.event.inputs.version }}
