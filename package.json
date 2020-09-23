@@ -7,6 +7,9 @@
     "@actions/core": "^1.2.5",
     "@actions/exec": "^1.0.4"
   },
+  "scripts": {
+    "build": "ncc build index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jclem/release.git"
@@ -16,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/jclem/release/issues"
   },
-  "homepage": "https://github.com/jclem/release#readme"
+  "homepage": "https://github.com/jclem/release#readme",
+  "devDependencies": {
+    "@vercel/ncc": "^0.24.1"
+  }
 }
