@@ -67,8 +67,17 @@ async function commit() {
 
     await exec.exec('git', ['add', '--all'])
     await exec.exec('git', ['config', 'user.name', 'github-actions'])
-    await exec.exec('git', ['config', 'user.email', 'github-actions@github.com'])
-    await exec.exec('git', ['commit', '--message', `Build from https://github.com/${process.env.GITHUB_REPOSITORY}/runs/${github.context.runId}`])
+    await exec.exec('git', [
+      'config',
+      'user.email',
+      'github-actions@github.com'
+    ])
+    await exec.exec('git', [
+      'commit',
+      '--allow-empty',
+      '--message',
+      `Build from https://github.com/${process.env.GITHUB_REPOSITORY}/runs/${github.context.runId}`
+    ])
     const npmVsnArgs = preID ? [newVersion, `--preid=${preID}`] : [newVersion]
     await exec.exec('npm', ['version', ...npmVsnArgs])
     await exec.exec('git', ['tag', '-f', 'latest'])
