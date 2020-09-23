@@ -1,0 +1,12 @@
+name: Release
+description: Build and create a release with minimal configuration
+inputs:
+  release:
+    description: One of "major", "minor", or "patch", telling this action what type of version update to perform
+    required: true
+  branch:
+    description: The name of the branch to use for releases
+    default: release
+runs:
+  using: node12
+  main: index.js

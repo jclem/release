@@ -1,0 +1,17 @@
+name: Create a release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: One of "major", "minor", or "patch", telling this action what type of version update to perform
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          release: ${{ github.event.inputs.release }}
