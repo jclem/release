@@ -1,5 +1,6 @@
 const core = require('@actions/core')
 const exec = require('@actions/exec')
+const github = require('@actions/github')
 
 const releases = [
   'major',
@@ -39,15 +40,11 @@ async function install() {
 async function build() {
   await group('Starting build', async () => {
     await exec.exec('npm', ['run', '--if-present', 'build'])
-    await exec.exec('git', ['add', '--all'])
-    await exec.exec('git', ['stash'])
   })
 }
 
 async function commit() {
   await group('Commiting changes', async () => {
-    await exec.exec('git', ['checkout', 'stash', '--', '.'])
-
     const newVersion = getInput('version', null, {required: true})
     const preID = getInput('pre-id', null)
 
@@ -62,6 +59,7 @@ async function commit() {
     }
 
     await exec.exec('git', ['add', '--all'])
+    await exec.exec('git', ['commit', '--message', `Build from https://github.com/${process.env.GITHUB_REPOSITORY}/runs/${github.context.runId}`])
     const npmVsnArgs = preID ? [newVersion, `--preid=${preID}`] : [newVersion]
     await exec.exec('npm', ['version', ...npmVsnArgs])
     await exec.exec('git', ['tag', '-f', 'latest'])
