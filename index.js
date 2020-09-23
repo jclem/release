@@ -59,12 +59,13 @@ async function commit() {
     await exec.exec('git', ['add', '--all'])
     const npmVsnArgs = preID ? [newVersion, `--preid=${preID}`] : [newVersion]
     await exec.exec('npm', ['version', ...npmVsnArgs])
+    await exec.exec('git', ['tag', '-f', 'latest'])
   })
 }
 
 async function push(releaseBranch) {
   await group('Pushing changes', async () => {
-    await exec.exec('git', ['push', 'origin', releaseBranch])
+    await exec.exec('git', ['push', '--follow-tags', 'origin', releaseBranch])
   })
 }
 
