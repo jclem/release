@@ -1,9 +1,11 @@
 name: Release
 description: Build and create a release with minimal configuration
 inputs:
-  release:
-    description: One of "major", "minor", or "patch", telling this action what type of version update to perform
+  version:
+    description: One of 'major', 'minor', 'patch', 'premajor', 'preminor', 'prepatch', 'prerelease' telling this action what type of version update to perform
     required: true
+  pre-id:
+    description: An optional prerelease ID if using the 'preprelease' version
   branch:
     description: The name of the branch to use for releases
     default: release

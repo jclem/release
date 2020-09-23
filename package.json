@@ -1,6 +1,6 @@
 {
   "name": "release",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "This action provides an easy way to build and release an action in your workflow.",
   "main": "index.js",
   "dependencies": {
