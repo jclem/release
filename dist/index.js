@@ -68,7 +68,7 @@ async function commit() {
     await exec.exec('git', ['add', '--all'])
     await exec.exec('git', ['config', 'user.name', 'github-actions'])
     await exec.exec('git', [
-      '',
+      'config',
       'user.email',
       'github-actions@github.com'
     ])
