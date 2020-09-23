@@ -39,11 +39,14 @@ async function install() {
 async function build() {
   await group('Starting build', async () => {
     await exec.exec('npm', ['run', '--if-present', 'build'])
+    await exec.exec('git', ['stash', '--all'])
   })
 }
 
 async function commit() {
   await group('Commiting changes', async () => {
+    await exec.exec('git', ['stash', 'pop'])
+
     const newVersion = getInput('version', null, {required: true})
     const preID = getInput('pre-id', null)
 
