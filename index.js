@@ -45,7 +45,7 @@ async function build() {
 
 async function commit() {
   await group('Commiting changes', async () => {
-    await exec.exec('git', ['stash', 'pop'])
+    await exec.exec('git', ['stash', 'pop', '--index'])
 
     const newVersion = getInput('version', null, {required: true})
     const preID = getInput('pre-id', null)
