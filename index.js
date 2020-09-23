@@ -25,6 +25,7 @@ async function main() {
 
 async function checkout(releaseBranch) {
   await group('Checking out release branch', async () => {
+    await exec.exec('git', ['fetch', 'origin', releaseBranch])
     await exec.exec('git', ['checkout', releaseBranch])
   })
 }
