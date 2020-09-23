@@ -68,7 +68,7 @@ async function commit() {
     await exec.exec('git', ['add', '--all'])
     await exec.exec('git', ['config', 'user.name', 'github-actions'])
     await exec.exec('git', [
-      'config',
+      '',
       'user.email',
       'github-actions@github.com'
     ])
@@ -86,7 +86,8 @@ async function commit() {
 
 async function push(releaseBranch) {
   await group('Pushing changes', async () => {
-    await exec.exec('git', ['push', '--follow-tags', 'origin', releaseBranch])
+    await exec.exec('git', ['push', 'origin', releaseBranch])
+    await exec.exec('git', ['push', '--tags', '--force'])
   })
 }
 
