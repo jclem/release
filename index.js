@@ -79,5 +79,7 @@ async function group(name, fn) {
 }
 
 function getInput(key, defaultValue = null, opts = {}) {
-  core.getInput(key, opts) || defaultValue
+  const value = core.getInput(key, opts) || defaultValue
+  core.debug(`got value "${value}" for input "${key}"`)
+  return value
 }
